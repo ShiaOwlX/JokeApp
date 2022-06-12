@@ -15,13 +15,11 @@ Jokes.Add(Joke);
 Jokes.WriteFile(Filename);
 
 // display info to user
-Console.WriteLine("\n");
 Console.WriteLine(Joke.Setup);
 Console.WriteLine(Joke.Delivery);
 
 Console.WriteLine("\n");
 Console.WriteLine($"Category: {Joke.Category}");
 Console.WriteLine($"Joke id: {Joke.ID}");
-Console.WriteLine("\n");
 
 //Console.ReadLine();
