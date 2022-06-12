@@ -4,15 +4,16 @@
     {
 
 
-        public string Setup { get; set; }
-        public string Delivery { get; set; }
-        public string Category { get; set; }
-        public string ID { get; set; }
+        public string Setup { get; set; } = "Empty";
+        public string Delivery { get; set; } = "Empty";
+        public string Category { get; set; } = "Unknown";
+        public string ID { get; set; } = "0";
 
-        // TODO: santize string to avoid bad ',' in the joke text and switch delimtor to ','
+        
         /// <summary>
-        /// Overrides ToString, concates with '^; delimtor
+        /// Converts Joke Model to string while sanitizing
         /// </summary>
-        public new string ToString =>  $"{this.ID}^{this.Category}^{this.Setup}^{this.Delivery}";
+        public  string JokeForCSV => $"{ID.PrepStringForCSV()},{Category.PrepStringForCSV()},{Setup.PrepStringForCSV()},{Delivery.PrepStringForCSV()}";
+            
     }
 }

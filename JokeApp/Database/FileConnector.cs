@@ -58,12 +58,12 @@ namespace JokeApp.Database
             // convert joke and add to list
             foreach (string line in Lines)
             {
-                string[] parts = line.Split('^');
+                string[] parts = line.Split(',');
                 JokeModel j = new JokeModel();
-                j.ID = parts[0];
-                j.Category = parts[1];
-                j.Setup = parts[2];
-                j.Delivery = parts[3];
+                j.ID = parts[0].PrepStringFromCSV();
+                j.Category = parts[1].PrepStringFromCSV();
+                j.Setup = parts[2].PrepStringFromCSV();
+                j.Delivery = parts[3].PrepStringFromCSV();
                 Jokes.Add(j);
             }
             return Jokes;
@@ -82,7 +82,7 @@ namespace JokeApp.Database
             // convert to string and add to list
             foreach (JokeModel joke in jokes)
             {
-                string JokeLine = joke.ToString;
+                string JokeLine = joke.JokeForCSV;
                 JokeLines.Add(JokeLine);
             }
 
