@@ -9,6 +9,13 @@ namespace JokeApp.Database
 {
     public static class FileConnector
     {
+        /// <summary>
+        /// Gets the file path from config and appends  'filename'
+        /// </summary>
+        /// <param name="fileName">
+        /// name of file (do not add leading slash)
+        /// </param>
+        /// <returns> String of proper path</returns>
         public static string FilePath(this string fileName)
         {
             // get app config path if set
@@ -19,7 +26,10 @@ namespace JokeApp.Database
             return $"{folder}\\{fileName}";
         }
 
-        // check if folder exists
+        /// <summary>
+        /// Make sure folder exsits, create if not found
+        /// </summary>
+        /// <param name="folder"> Path to folder</param>
         internal static void InitializeFolder(string folder)
         {
             if (!Directory.Exists(folder))
@@ -28,7 +38,11 @@ namespace JokeApp.Database
             }
         }
 
-        // read file, convert each line to a joke model and return a list (if no file retirn empty)
+        /// <summary>
+        /// Read file (full path), convert each line to a joke model and return a List<JokeModel> (if no file returns empty List<JokeModel>)
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static List<JokeModel> ReadFile(this string file)
         {
             if (!File.Exists(file))
@@ -55,7 +69,11 @@ namespace JokeApp.Database
             return Jokes;
         }
 
-        // save all jokes to file
+        /// <summary>
+        /// Save all jokes to file
+        /// </summary>
+        /// <param name="jokes"></param>
+        /// <param name="filename"></param>
         public static void WriteFile(this List<JokeModel> jokes, string filename)
         {
             // new list for each row in the csv

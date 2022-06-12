@@ -8,6 +8,13 @@ namespace JokeApp
 {
     public class GetJoke
     {
+        /// <summary>
+        /// Calls the Joke API 
+        /// </summary>
+        /// <returns>
+        /// Joke as JokeModel
+        /// </returns>
+        /// <exception cref="Exception"></exception>
         public static async Task<JokeModel> CallApi()
         {
             // TODO: set config for joke catagory, style, nsfw etc

@@ -11,6 +11,9 @@ namespace JokeApp
     {
         public static HttpClient Instance { get; set; }= new HttpClient();
 
+        /// <summary>
+        /// Set up HttpClient with header and base URI
+        /// </summary>
         public static void InitializeApi()
         {
             Instance.DefaultRequestHeaders.Accept.Clear();
