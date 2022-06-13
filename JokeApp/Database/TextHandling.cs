@@ -24,7 +24,7 @@ namespace JokeApp
         /// <returns></returns>
         public static string PrepStringFromCSV(this string value)
         {
-            return value.Substring(1, value.Length - 2).Replace(oldValue: "\"\"", newValue: "\"");
+            return value[1..^1].Replace(oldValue: "\"\"", newValue: "\"");
         }
     }
 }
