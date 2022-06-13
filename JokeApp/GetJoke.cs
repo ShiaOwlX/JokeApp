@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace JokeApp
@@ -23,8 +24,17 @@ namespace JokeApp
             if (response.IsSuccessStatusCode)
             {
                 // get response and extract only the fields of the joke
-                JokeModel Joke = await response.Content.ReadAsAsync<JokeModel>();
-                return Joke;
+                var JokeResponse = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrWhiteSpace(JokeResponse))
+                {
+                    throw new Exception("Joke response null or empty");
+                }
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var Joke = JsonSerializer.Deserialize<JokeModel>(JokeResponse, options);
+                return (JokeModel)Joke;
             }
             else
             {
