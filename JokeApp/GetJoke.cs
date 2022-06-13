@@ -34,7 +34,13 @@ namespace JokeApp
                     PropertyNameCaseInsensitive = true
                 };
                 var Joke = JsonSerializer.Deserialize<JokeModel>(JokeResponse, options);
+                if (Joke == null)
+                {
+                    throw new Exception("JokeModel is null");
+                }
                 return (JokeModel)Joke;
+
+
             }
             else
             {
