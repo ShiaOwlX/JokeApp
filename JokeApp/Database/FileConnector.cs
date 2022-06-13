@@ -53,17 +53,19 @@ namespace JokeApp.Database
             List<string> Lines = File.ReadAllLines(file).ToList();
 
             // new list to add each joke
-            List<JokeModel> Jokes = new List<JokeModel>();
+            List<JokeModel> Jokes = new();
 
             // convert joke and add to list
             foreach (string line in Lines)
             {
                 string[] parts = line.Split(',');
-                JokeModel j = new JokeModel();
-                j.ID = parts[0].PrepStringFromCSV();
-                j.Category = parts[1].PrepStringFromCSV();
-                j.Setup = parts[2].PrepStringFromCSV();
-                j.Delivery = parts[3].PrepStringFromCSV();
+                JokeModel j = new()
+                {
+                    ID = int.Parse(parts[0].PrepStringFromCSV()),
+                    Category = parts[1].PrepStringFromCSV(),
+                    Setup = parts[2].PrepStringFromCSV(),
+                    Delivery = parts[3].PrepStringFromCSV()
+                };
                 Jokes.Add(j);
             }
             return Jokes;
@@ -77,7 +79,7 @@ namespace JokeApp.Database
         public static void WriteFile(this List<JokeModel> jokes, string filename)
         {
             // new list for each row in the csv
-            List<string> JokeLines = new List<string>();
+            List<string> JokeLines = new();
 
             // convert to string and add to list
             foreach (JokeModel joke in jokes)
