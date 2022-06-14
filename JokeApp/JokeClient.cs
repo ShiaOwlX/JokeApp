@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace JokeApp
 {
-    public class GetJoke
+    public class JokeClient : IDisposable
     {
+        private readonly JokeHttpClient _httpClient = new();
+
+        public void Dispose()
+        {
+            _httpClient.Dispose();
+            // TODO: IDE wants this, why??
+            GC.SuppressFinalize(this);
+        }
+
         /// <summary>
         /// Calls the Joke API 
         /// </summary>
@@ -16,11 +25,15 @@ namespace JokeApp
         /// Joke as JokeModel
         /// </returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<JokeModel> CallApi(string category = "Any")
+        public async Task<JokeModel> GetJokeAsync(JokeCategory jokeCategory)
         {
             // TODO: set config for joke catagory, style, nsfw etc
+
+            // Remove spaces
+            var category = jokeCategory.ToString().Replace(" ", "");
+            
             // saving memory
-            using HttpResponseMessage response = await ApiHelper.Instance.GetAsync($"joke/{category}?type=twopart");
+            using HttpResponseMessage response = await _httpClient.GetAsync($"joke/{category}?type=twopart");
             if (response.IsSuccessStatusCode)
             {
                 // get response and extract only the fields of the joke
