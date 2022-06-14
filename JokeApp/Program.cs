@@ -3,14 +3,14 @@ using JokeApp.Database;
 using System.Configuration;
 
 // set up
-ApiHelper.InitializeApi();
+var jokeClient = new JokeClient();
 string Filename = ConfigurationManager.AppSettings["filename"] ?? "lostJokes.csv";
 
 // load saved data
 List<JokeModel> Jokes = Filename.FilePath().ReadFile();
 
 // get a new joke and save it
-JokeModel Joke = await GetJoke.CallApi();
+JokeModel Joke = await jokeClient.GetJokeAsync();
 Jokes.Add(Joke);
 Jokes.WriteFile(Filename);
 
