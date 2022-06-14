@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace JokeApp
 {
-    public class GetJoke
+    public class JokeClient
     {
+        private JokeHttpClient _httpClient = new();
+
         /// <summary>
         /// Calls the Joke API 
         /// </summary>
@@ -16,11 +18,11 @@ namespace JokeApp
         /// Joke as JokeModel
         /// </returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<JokeModel> CallApi(string category = "Any")
+        public async Task<JokeModel> GetJokeAsync(string category = "Any")
         {
             // TODO: set config for joke catagory, style, nsfw etc
             // saving memory
-            using HttpResponseMessage response = await ApiHelper.Instance.GetAsync($"joke/{category}?type=twopart");
+            using HttpResponseMessage response = await _httpClient.GetAsync($"joke/{category}?type=twopart");
             if (response.IsSuccessStatusCode)
             {
                 // get response and extract only the fields of the joke
