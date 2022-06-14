@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JokeApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,16 @@ namespace ChooseJoke
         /// </summary>
         /// <param name="options"></param>
         /// <returns>Comma separated list of users choice</returns>
-        public static string Run( List<OptionModel> options)
+        public static async Task RunAsync(List<OptionModel> options)
         {
+
             var menu = new Menu();
+            using var jokeClient = new JokeClient();
             var selectedOption = 0;
-            menu.LoadMenu(options, options[selectedOption]);
             do
             {
+                menu.LoadMenu(options, options[selectedOption]);
+
                 ConsoleKeyInfo key = Console.ReadKey();
 
                 switch (key.Key)
@@ -31,7 +35,7 @@ namespace ChooseJoke
                             {
                                 selectedOption = 0;
                             }
-                            menu.LoadMenu(options, options[selectedOption]);
+                            
                         }
                         break;
                     case ConsoleKey.UpArrow:
@@ -41,36 +45,39 @@ namespace ChooseJoke
                             {
                                 selectedOption = options.Count - 1;
                             }
-                            menu.LoadMenu(options, options[selectedOption]);
+                            
                         }
                         break;
                     case ConsoleKey.Spacebar:
                         {
                             options[selectedOption].Selected = !options[selectedOption].Selected;
-                            menu.LoadMenu(options, options[selectedOption]);
+                            
                         }
                         break;
                     case ConsoleKey.Enter:
                         {
-                            StringBuilder stringBuilder = new();
+                            JokeCategory jokeCategory =  JokeCategory.Any;
                             foreach (var option in options)
                             {
                                 if (option.Selected)
                                 {
-                                    stringBuilder.Append(option.Name + ',');
+                                    jokeCategory |= (JokeCategory)Enum.Parse(typeof(JokeCategory),option.Name);
                                 }
                             }
 
-                            if (stringBuilder.Length != 0)
-                            {
-                                stringBuilder.Length--;
-                            }
-                            else
-                            {
-                                stringBuilder = new StringBuilder(AppStrings.DefaultJokeParam);
-                            }
-                            return stringBuilder.ToString();
-                        }     
+                            
+
+                            JokeModel Joke = await jokeClient.GetJokeAsync(jokeCategory);
+
+                            Console.Clear();
+                            Console.WriteLine(Joke.Setup);
+                            Console.WriteLine(Joke.Delivery);
+                            Console.WriteLine();
+                            Console.WriteLine(AppStrings.EnterToContinue);
+                            Console.ReadLine();
+                            
+                        }
+                        break;
                 }
             } while (true);
         }
