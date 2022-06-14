@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JokeApp", "JokeApp\JokeApp.csproj", "{37443915-0122-4894-A2B2-DDD8CEF2407B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChooseJoke", "ConsoleApp1\ChooseJoke.csproj", "{BC114CAF-C41D-46C7-BB26-7823998081DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChooseJoke", "ConsoleApp1\ChooseJoke.csproj", "{BC114CAF-C41D-46C7-BB26-7823998081DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEnum", "TestEnum\TestEnum.csproj", "{97D3F77E-C53F-4DA0-9FFE-B2FB30916DDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BC114CAF-C41D-46C7-BB26-7823998081DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC114CAF-C41D-46C7-BB26-7823998081DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC114CAF-C41D-46C7-BB26-7823998081DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D3F77E-C53F-4DA0-9FFE-B2FB30916DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D3F77E-C53F-4DA0-9FFE-B2FB30916DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D3F77E-C53F-4DA0-9FFE-B2FB30916DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D3F77E-C53F-4DA0-9FFE-B2FB30916DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
